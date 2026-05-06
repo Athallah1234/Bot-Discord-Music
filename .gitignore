@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables (SANGAT PENTING!)
+.env
+
+# Logs
+logs/
+*.log
+
+# Multimedia (Cookies & Temporary files)
+cookies.txt
+*.mp3
+*.m4a
+*.webm
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+.project
+.settings/
+
+# OS metadata
+.DS_Store
+Thumbs.db
