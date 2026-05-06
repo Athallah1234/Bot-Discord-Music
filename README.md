@@ -6,12 +6,6 @@
 
 Sebuah mahakarya bot musik Discord yang dibangun menggunakan **Python murni**, mengedepankan performa tinggi, desain UI yang elegan, dan kemudahan penggunaan melalui fitur **Slash Commands** terbaru. Bot ini dirancang khusus untuk memberikan pengalaman mendengarkan musik yang mulus tanpa hambatan.
 
----
-
-## ✨ Kenapa Memilih Bot Ini?
-
-Bot ini bukan sekadar pemutar musik biasa. Kami mengintegrasikan teknologi ekstraksi audio tercanggih untuk memastikan stabilitas dan kualitas suara maksimal.
-
 - **🚀 Performa Kilat**: Optimalisasi `yt-dlp` tingkat tinggi untuk ekstraksi metadata yang instan.
 - **💎 UI Premium**: Pesan "Now Playing" dilengkapi dengan **Interactive Buttons** (Play, Pause, Skip, Stop, Loop).
 - **🔒 Keamanan Terjamin**: Menggunakan `.env` untuk melindungi Token Bot Anda.
@@ -23,18 +17,18 @@ Bot ini bukan sekadar pemutar musik biasa. Kami mengintegrasikan teknologi ekstr
 ## 📌 Daftar Isi
 1. [Fitur Utama](#-fitur-fitur-unggulan)
 2. [Daftar Perintah (Slash Commands)](#-daftar-perintah-slash-commands)
-3. [Struktur Proyek](#-struktur-folder-proyek)
-4. [Panduan Instalasi](#-panduan-instalasi--persiapan)
-5. [Konfigurasi .env](#-detail-konfigurasi-env)
-6. [Arsitektur Sistem](#%EF%B8%8F-arsitektur-sistem)
-7. [Panduan Troubleshooting](#%EF%B8%8F-deep-dive-panduan-lanjutan--troubleshooting)
-8. [Tips Hosting 24/7](#2-tips-hosting-247)
-9. [Panduan Pengembangan (Developer Guide)](#%EF%B8%8F-panduan-pengembangan-developer-guide)
-10. [Filosofi Kode](#-filosofi-kode-code-philosophy)
-11. [Referensi API Internal](#-referensi-api-internal-internal-api)
-12. [F.A.Q](#3-masalah-umum-faq)
-13. [Roadmap & Changelog](#-roadmap-pengembangan-masa-depan)
-14. [Lisensi & Hukum](#-penafian-hukum-legal-disclaimer)
+3. [Panduan Instalasi & Persiapan](#-panduan-instalasi--persiapan)
+4. [Detail Konfigurasi (.env)](#-detail-konfigurasi-env)
+5. [Struktur Folder Proyek](#-struktur-folder-proyek)
+6. [Arsitektur Sistem](#-arsitektur-sistem)
+7. [Filosofi Kode](#-filosofi-kode-code-philosophy)
+8. [Referensi API Internal](#-referensi-api-internal-internal-api)
+9. [Deep Dive: Troubleshooting](#-deep-dive-panduan-lanjutan--troubleshooting)
+10. [Tips Hosting 24/7](#2-tips-hosting-247)
+11. [Panduan Pengembangan (Developer Guide)](#-panduan-pengembangan-developer-guide)
+12. [Roadmap & Changelog](#-roadmap-pengembangan-masa-depan)
+13. [F.A.Q](#3-masalah-umum-faq)
+14. [Penafian Hukum & Branding](#-penafian-hukum-legal-disclaimer)
 
 ---
 
@@ -59,12 +53,10 @@ Kontrol musik langsung melalui tombol di bawah pesan tanpa perlu mengetik perint
 
 ## 🎮 Daftar Perintah (Slash Commands)
 
-Semua perintah di bawah ini menggunakan sistem **Slash Commands (/)**.
-
 | Perintah | Deskripsi | Parameter |
 | :--- | :--- | :--- |
 | `/help` | Menampilkan menu bantuan premium ini. | - |
-| `/play` | Memutar lagu dari YouTube (URL atau Judul). | `query` (Wajib) |
+| `/play` | Memutar lagu dari YouTube (URL atau Judul). | `query` |
 | `/nowplaying` | Menampilkan detail lagu yang sedang diputar. | - |
 | `/queue` | Melihat daftar 10 lagu mendatang di antrean. | - |
 | `/skip` | Melewati lagu saat ini ke lagu berikutnya. | - |
@@ -72,31 +64,10 @@ Semua perintah di bawah ini menggunakan sistem **Slash Commands (/)**.
 | `/resume` | Melanjutkan musik yang dijeda. | - |
 | `/stop` | Menghentikan musik dan menghapus antrean. | - |
 | `/shuffle` | Mengacak seluruh daftar lagu di antrean. | - |
-| `/remove` | Menghapus lagu tertentu dari antrean. | `index` (Wajib) |
-| `/volume` | Mengatur volume suara bot (1-100%). | `volume` (Wajib) |
+| `/remove` | Menghapus lagu tertentu dari antrean. | `index` |
+| `/volume` | Mengatur volume suara bot (1-100%). | `volume` |
 | `/join` | Memanggil bot masuk ke Voice Channel Anda. | - |
 | `/leave` | Mengeluarkan bot dari Voice Channel. | - |
-
----
-
-## 📦 Struktur Folder Proyek
-
-```text
-MusicBot/
-├── cogs/
-│   └── music.py        # Inti dari semua perintah Slash & logika Musik
-├── modules/
-│   ├── player.py       # Mesin utama (MusicPlayer & YTDLSource)
-│   └── ui.py           # Desain tombol interaktif (Buttons & Views)
-├── utils/
-│   └── logger.py       # Sistem log profesional (Console & File)
-├── logs/
-│   └── bot.log         # Rekam jejak aktivitas bot
-├── .env                # Konfigurasi rahasia (Token, Guild ID)
-├── bot.py              # Entry point utama aplikasi
-├── requirements.txt    # Daftar dependensi library
-└── README.md           # Dokumentasi super lengkap
-```
 
 ---
 
@@ -105,123 +76,15 @@ MusicBot/
 ### 1. Prasyarat Sistem
 - **Python 3.10+**: [Unduh di sini](https://www.python.org/).
 - **FFmpeg**: Wajib terinstal di sistem Anda.
-  - Windows: Tambahkan ke `System PATH`.
-  - Linux: `sudo apt install ffmpeg`.
 
 ### 2. Kloning & Instalasi Library
 ```bash
-# Instal library yang dibutuhkan
 pip install -r requirements.txt
 ```
 
-### 3. Konfigurasi `.env`
-Buka file `.env` dan lengkapi datanya:
-```env
-DISCORD_TOKEN=Token_Bot_Anda
-DEBUG_MODE=False
-GUILD_ID=ID_Server_Anda (Opsional, untuk sinkronisasi instan)
-```
-
-### 4. Menjalankan Bot
+### 3. Menjalankan Bot
 ```bash
 python bot.py
-```
-
----
-
-## 🛡️ Penanganan Error (Error Handling)
-Bot ini dilengkapi dengan **Global Error Handler** yang akan menangkap masalah seperti:
-- Pengguna tidak berada di Voice Channel.
-- Bot kekurangan izin (Permission) untuk berbicara/bergabung.
-- Lagu tidak ditemukan di YouTube.
-- Masalah jaringan atau rate limit API.
-
----
-
-## 📝 Catatan Teknis
-- **FFmpeg Options**: Menggunakan flag `-reconnect` untuk mencegah pemutusan audio di tengah jalan.
-- **YTDL Options**: Dioptimalkan dengan `force_ipv4` dan `cachedir: False` untuk kecepatan ekstraksi maksimal.
-- **Asyncio Queue**: Menggunakan antrean asinkron murni agar tidak menghambat kinerja bot utama.
-
----
-
-## 🤝 Kontribusi
-Ingin menambahkan fitur? Silakan lakukan *fork* dan kirimkan *pull request* Anda! Kami sangat menghargai kontribusi untuk membuat bot ini menjadi lebih baik lagi.
-
-**Dibuat dengan ❤️ oleh Antigravity.**
-
----
-
-## 🛠️ Deep Dive: Panduan Lanjutan & Troubleshooting
-
-### 1. Mengatasi Masalah Video Age-Restricted
-Terkadang YouTube memblokir akses ke video tertentu (age-restricted). Untuk mengatasinya, Anda bisa menggunakan file `cookies.txt`:
-1. Instal ekstensi **"Get cookies.txt LOCALLY"** di Chrome/Edge.
-2. Buka YouTube, klik ekstensi tersebut, dan unduh filenya.
-3. Simpan sebagai `cookies.txt` di folder root bot.
-4. Perbarui baris `ytdl_format_options` di `modules/player.py` dengan menambahkan `'cookiefile': 'cookies.txt'`.
-
-### 2. Tips Hosting 24/7
-Agar bot musik Anda tetap menyala tanpa henti, kami menyarankan beberapa opsi berikut:
-- **VPS (Virtual Private Server)**: Gunakan Ubuntu 22.04 LTS. Instal `screen` atau `pm2` untuk menjalankan bot di background.
-  ```bash
-  # Menjalankan dengan PM2 (Memerlukan Node.js)
-  pm2 start bot.py --name "music-bot" --interpreter python3
-  ```
-- **Docker**: (Segera Hadir) Kami sedang menyiapkan `Dockerfile` untuk deployment satu klik.
-
-### 3. Masalah Umum (F.A.Q)
-- **Q: Kenapa lagu tiba-tiba berhenti?**
-  - **A**: Pastikan koneksi internet server Anda stabil. Bot sudah menggunakan flag `-reconnect`, namun pemutusan jaringan yang lama tetap akan menghentikan audio.
-- **Q: Kenapa bot tidak merespon perintah slash?**
-  - **A**: Pastikan Anda sudah mengisi `GUILD_ID` di `.env` untuk sinkronisasi instan, atau tunggu hingga 1 jam untuk sinkronisasi global.
-- **Q: Suara bot pecah atau lag?**
-  - **A**: Ini biasanya masalah CPU pada server atau lokasi server yang terlalu jauh dari region Voice Channel Discord. Pastikan region Voice Channel sama dengan lokasi VPS Anda.
-
----
-
-## 📈 Roadmap Pengembangan Masa Depan
-- [ ] Integrasi Lirik Lagu secara real-time.
-- [ ] Dukungan pemutaran dari SoundCloud dan Mixer.
-- [ ] Sistem Leveling Musik (XP setiap kali mendengarkan).
-- [ ] Web Dashboard sederhana untuk kontrol antrean (Opsional).
-
----
-
-## 📝 Lisensi & Hak Cipta
-Proyek ini dilisensikan di bawah **MIT License**. Anda bebas menggunakan, memodifikasi, dan mendistribusikan ulang kode ini selama menyertakan atribusi asli.
-
----
-
-> [!IMPORTANT]
-> Selalu jaga kerahasiaan `DISCORD_TOKEN` Anda. Jangan pernah membagikan file `.env` kepada siapapun atau mengunggahnya ke repositori publik tanpa `.gitignore`.
-
----
-
-## 🏗️ Arsitektur Sistem
-
-Berikut adalah alur kerja bot dalam memproses permintaan musik Anda:
-
-```mermaid
-graph TD
-    A[User Slash Command] --> B{Bot.py}
-    B --> C[Music Cog]
-    C --> D[SpotifyHandler / YT Search]
-    D --> E[YTDLSource Extractor]
-    E --> F[FFmpeg Audio Stream]
-    F --> G[Voice Channel]
-    G --> H[User's Ears]
-    
-    subgraph "Logic Layer"
-    C
-    D
-    E
-    end
-    
-    subgraph "Audio Layer"
-    F
-    G
-    end
 ```
 
 ---
@@ -238,153 +101,133 @@ graph TD
 
 ---
 
-## 🛠️ Panduan Pengembangan (Developer Guide)
+## 📦 Struktur Folder Proyek
 
-### Menambahkan Command Baru
-Jika Anda ingin menambahkan fitur baru, silakan buka `cogs/music.py` dan ikuti pola berikut:
-```python
-@app_commands.command(name="nama_fitur", description="Deskripsi fitur")
-@app_commands.guild_only()
-async def nama_fitur(self, interaction: discord.Interaction):
-    await interaction.response.defer()
-    # Logika Anda di sini
-    await interaction.followup.send("Berhasil!")
-```
-
-### Optimasi FFmpeg
-Bot ini menggunakan parameter FFmpeg yang sangat spesifik untuk menjamin kualitas audio:
-- `before_options`: Menangani rekoneksi otomatis jika terjadi *packet loss*.
-- `options`: Mengaktifkan filter `-vn` (video none) untuk menghemat CPU server.
-
----
-
-## 📈 Log Perubahan (Changelog)
-- **v1.0.0**: Initial Release dengan fitur dasar YouTube.
-- **v1.1.0**: Penambahan sistem antrean (Queue) asinkron.
-- **v1.2.0**: Implementasi Slash Commands & UI Buttons.
-- **v1.3.0**: Penambahan fitur `/shuffle`, `/remove`, dan `/help`.
-- **v1.4.0**: Optimalisasi stabilitas dan penanganan error global.
-
----
-
-## 🤝 Kontribusi & Donasi
-Kami menerima segala bentuk kontribusi melalui *Pull Request*. Jika Anda menyukai proyek ini, berikan **Star ⭐** pada repositori ini!
-
----
-
-**Dibuat dengan ❤️ oleh Antigravity untuk Komunitas Discord.**
-
----
-
-## 📚 Detail Dependensi & Rasionalisasi
-
-Mengapa kami memilih teknologi ini? Berikut adalah alasannya:
-
-- **`discord.py (v2.0+)`**: Library paling stabil untuk Python yang mendukung penuh *Application Commands* dan interaksi UI modern.
-- **`yt-dlp`**: Fork dari `youtube-dl` yang jauh lebih aktif dan memiliki kecepatan ekstraksi 3x lebih cepat serta dukungan situs yang lebih luas.
-- **`PyNaCl`**: Library kriptografi wajib untuk mendukung enkripsi suara (Voice Encryption) di Discord.
-- **`python-dotenv`**: Standar industri untuk mengelola variabel lingkungan agar kredensial tetap aman.
-
----
-
-## 🛡️ Keamanan Lanjutan (Security Hardening)
-
-Untuk penggunaan tingkat produksi, kami menyarankan:
-1. **Rotasi Token**: Ganti `DISCORD_TOKEN` Anda setiap 3 bulan sekali.
-2. **Environment Isolation**: Gunakan fitur *Secrets* jika Anda men-deploy di platform seperti GitHub Actions atau Heroku.
-3. **Privileged Gateway Intents**: Bot ini hanya memerlukan `GUILD_VOICE_STATES` untuk berfungsi. Anda tidak perlu mengaktifkan semua intent jika ingin menjaga privasi server tetap maksimal.
-
----
-
-## 🔧 Optimasi Sistem Operasi
-
-### Windows
-Pastikan FFmpeg ditambahkan ke **Environment Variables Path**. Anda bisa mengetik `ffmpeg -version` di CMD untuk memastikan.
-
-### Linux (Server)
-Kami menyarankan menggunakan `systemd` untuk memastikan bot otomatis menyala saat server restart:
-```ini
-# /etc/systemd/system/discord-bot.service
-[Unit]
-Description=Discord Music Bot
-After=network.target
-
-[Service]
-Type=simple
-User=root
-WorkingDirectory=/root/MusicBot
-ExecStart=/usr/bin/python3 bot.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+```text
+MusicBot/
+├── cogs/
+│   └── music.py        # Inti dari semua perintah Slash & logika Musik
+├── modules/
+│   ├── player.py       # Mesin utama (MusicPlayer & YTDLSource)
+│   └── ui.py           # Desain tombol interaktif (Buttons & Views)
+├── utils/
+│   └── logger.py       # Sistem log profesional (Console & File)
+├── logs/
+│   └── bot.log         # Rekam jejak aktivitas bot
+├── .env                # Konfigurasi rahasia
+├── bot.py              # Entry point utama aplikasi
+├── requirements.txt    # Daftar dependensi library
+└── README.md           # Dokumentasi
 ```
 
 ---
 
-## 💡 Tips & Trik Penggunaan
-- **Gunakan Judul yang Spesifik**: Saat menggunakan `/play [judul]`, tambahkan nama artis (misal: `/play Bohemian Rhapsody Queen`) agar `yt-dlp` mendapatkan hasil terbaik pada percobaan pertama.
-- **Volume Rendah**: Menjaga volume di kisaran 40-60% memberikan kualitas audio paling jernih tanpa distorsi digital.
+## 🏗️ Arsitektur Sistem
 
----
-
-## 📬 Kontak & Dukungan
-Jika Anda menemukan bug atau ingin berdiskusi tentang fitur baru, silakan gunakan fitur **Issues** di repositori ini atau hubungi kami melalui Discord.
-
----
-
-> [!TIP]
-> Star ⭐ proyek ini jika bermanfaat bagi Anda! Dukungan Anda sangat berarti bagi pengembangan fitur selanjutnya.
+```mermaid
+graph TD
+    A[User Slash Command] --> B{Bot.py}
+    B --> C[Music Cog]
+    C --> D[YT Search Extractor]
+    D --> E[YTDLSource Engine]
+    E --> F[FFmpeg Audio Stream]
+    F --> G[Voice Channel]
+    G --> H[User's Ears]
+```
 
 ---
 
 ## 🧩 Filosofi Kode (Code Philosophy)
 
 Proyek ini dibangun dengan prinsip-prinsip pengembangan perangkat lunak modern:
-- **Modularitas**: Setiap fungsi dipisahkan ke dalam modul yang spesifik (`cogs`, `modules`, `utils`) untuk memudahkan pemeliharaan.
-- **Asynchronicity**: Menggunakan `asyncio` secara menyeluruh untuk memastikan bot tetap responsif meskipun sedang melakukan tugas berat.
-- **Readability**: Kode ditulis dengan gaya PEP 8 yang bersih dan disertai komentar pada bagian-bagian yang kompleks.
-
----
-
-## 🔍 Tabel Troubleshooting Lanjutan
-
-| Masalah | Penyebab Umum | Solusi Cepat |
-| :--- | :--- | :--- |
-| `Voice Protocol Error` | Library `PyNaCl` tidak terinstal. | `pip install PyNaCl` |
-| `Opus Not Loaded` | File library `libopus` tidak ditemukan. | Instal `libopus-dev` (Linux) atau update `discord.py`. |
-| `403 Forbidden (YouTube)` | IP Server terkena rate limit YouTube. | Gunakan file `cookies.txt`. |
-| `Interaction Responded` | `defer()` dipanggil dua kali. | Pastikan hanya ada satu `response.defer()` per command. |
+- **Modularitas**: Fungsi dipisahkan ke modul spesifik (`cogs`, `modules`, `utils`).
+- **Asynchronicity**: Menggunakan `asyncio` secara menyeluruh.
+- **Readability**: Kode bersih gaya PEP 8 dengan komentar mendalam.
 
 ---
 
 ## 📖 Referensi API Internal (Internal API)
 
 ### Class: `MusicPlayer`
-Mengelola status musik untuk setiap server (guild).
 - `queue`: `asyncio.Queue` - Antrean lagu.
-- `current`: `Song` - Lagu yang sedang diputar.
-- `player_loop()`: Loop utama yang memproses antrean secara terus-menerus.
+- `current`: `Song` - Lagu aktif.
+- `player_loop()`: Loop utama pemroses antrean.
 
 ### Class: `YTDLSource`
-Menangani ekstraksi data dari `yt-dlp` dan konversi ke stream FFmpeg.
-- `from_url(url, stream=True)`: Method asinkron untuk mendapatkan objek audio.
-- `cleanup()`: Membersihkan resource setelah pemutaran selesai.
+- `from_url(url, stream=True)`: Method asinkron ekstraksi audio.
+- `cleanup()`: Pembersihan resource setelah pemutaran.
 
 ---
 
-## ⚖️ Penafian Hukum (Legal Disclaimer)
+## 🛠️ Deep Dive: Panduan Lanjutan & Troubleshooting
 
-Bot ini dibuat hanya untuk tujuan edukasi dan penggunaan pribadi. Pengguna bertanggung jawab penuh atas konten yang diputar melalui bot ini. Pastikan Anda mematuhi **Syarat Layanan (Terms of Service)** dari platform sumber seperti YouTube. Kami tidak bertanggung jawab atas penyalahgunaan bot ini yang melanggar hak cipta.
+### 1. Mengatasi Masalah Video Age-Restricted
+Gunakan file `cookies.txt`:
+1. Unduh dengan ekstensi browser "Get cookies.txt LOCALLY".
+2. Simpan di root folder bot.
+3. Tambahkan `'cookiefile': 'cookies.txt'` pada `ytdl_format_options` di `modules/player.py`.
+
+### 2. Tips Hosting 24/7
+- **VPS**: Gunakan Ubuntu 22.04 LTS.
+- **PM2**: `pm2 start bot.py --name "music-bot" --interpreter python3`.
 
 ---
 
-## 🌈 Skema Warna UI
-Bot ini menggunakan skema warna **Blurple (`#5865F2`)** untuk Embed utama, memberikan tampilan yang senada dengan branding asli Discord untuk kesan yang lebih "native" dan premium.
+## 🛠️ Panduan Pengembangan (Developer Guide)
+
+### Menambahkan Command Baru
+```python
+@app_commands.command(name="nama", description="deskripsi")
+@app_commands.guild_only()
+async def nama(self, interaction: discord.Interaction):
+    await interaction.response.defer()
+    # Logika
+    await interaction.followup.send("Berhasil!")
+```
+
+### Optimasi FFmpeg
+- `before_options`: Menangani rekoneksi otomatis.
+- `options`: Filter `-vn` untuk hemat resource.
 
 ---
 
-**© 2026 Antigravity - Versi Dokumentasi 1.5.0-Final.**
+## 📈 Roadmap & Changelog
 
+### 📈 Roadmap Pengembangan
+- [ ] Integrasi Lirik Lagu real-time.
+- [ ] Dukungan SoundCloud & Mixer.
+- [ ] Sistem Leveling Musik (XP).
 
+### 📈 Changelog
+- **v1.4.0**: Optimalisasi stabilitas & Error handling global.
+- **v1.3.0**: Penambahan `/shuffle`, `/remove`, dan `/help`.
+- **v1.2.0**: Slash Commands & UI Buttons.
 
+---
+
+## 3. Masalah Umum (F.A.Q)
+- **Q: Kenapa lagu tiba-tiba berhenti?** - Cek stabilitas internet server.
+- **Q: Kenapa bot tidak merespon?** - Pastikan sinkronisasi Slash Command selesai.
+- **Q: Suara bot lag?** - Cek beban CPU atau ganti region Voice Channel.
+
+---
+
+## 🤝 Kontribusi & Donasi
+Kami menerima kontribusi melalui *Pull Request*. Berikan **Star ⭐** jika bermanfaat!
+
+---
+
+## ⚖️ Penafian Hukum & Branding
+
+### ⚖️ Penafian Hukum (Legal Disclaimer)
+Bot ini untuk edukasi & penggunaan pribadi. Patuhi **ToS YouTube**. Kami tidak bertanggung jawab atas penyalahgunaan hak cipta.
+
+### 🌈 Skema Warna UI
+Menggunakan warna **Blurple (`#5865F2`)** agar senada dengan branding asli Discord.
+
+---
+
+> [!IMPORTANT]
+> Jaga kerahasiaan `DISCORD_TOKEN`. Jangan unggah file `.env` ke repositori publik.
+
+**© 2026 Antigravity - Dokumentasi v1.5.0-Final.**
