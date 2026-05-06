@@ -1,233 +1,168 @@
-# 🎵 Ultimate Modern Discord Music Bot
+# 🎵 Ultimate Modern Discord Music Bot — Grandmaster Edition
 
-[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Discord.py](https://img.shields.io/badge/discord.py-v2.0%2B-blue.svg)](https://discordpy.readthedocs.io/en/stable/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-Sebuah mahakarya bot musik Discord yang dibangun menggunakan **Python murni**, mengedepankan performa tinggi, desain UI yang elegan, dan kemudahan penggunaan melalui fitur **Slash Commands** terbaru. Bot ini dirancang khusus untuk memberikan pengalaman mendengarkan musik yang mulus tanpa hambatan.
-
-- **🚀 Performa Kilat**: Optimalisasi `yt-dlp` tingkat tinggi untuk ekstraksi metadata yang instan.
-- **💎 UI Premium**: Pesan "Now Playing" dilengkapi dengan **Interactive Buttons** (Play, Pause, Skip, Stop, Loop).
-- **🔒 Keamanan Terjamin**: Menggunakan `.env` untuk melindungi Token Bot Anda.
-- **⚡ Slash Commands Only**: Mengikuti standar terbaru Discord, tidak ada lagi prefix `!` atau `?` yang membosankan.
-- **🎧 Audio Tanpa Buffer**: Konfigurasi FFmpeg khusus untuk streaming langsung tanpa download file.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Discord.py-v2.0%2B-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord.py">
+  <img src="https://img.shields.io/badge/yt--dlp-Latest-red?style=for-the-badge&logo=youtube&logoColor=white" alt="yt-dlp">
+  <img src="https://img.shields.io/badge/FFmpeg-Optimized-0078D4?style=for-the-badge&logo=ffmpeg&logoColor=white" alt="FFmpeg">
+  <img src="https://img.shields.io/badge/Status-Production--Ready-success?style=for-the-badge" alt="Status">
+</p>
 
 ---
 
-## 📌 Daftar Isi
-1. [Fitur Utama](#-fitur-fitur-unggulan)
-2. [Daftar Perintah (Slash Commands)](#-daftar-perintah-slash-commands)
-3. [Panduan Instalasi & Persiapan](#-panduan-instalasi--persiapan)
-4. [Detail Konfigurasi (.env)](#-detail-konfigurasi-env)
-5. [Struktur Folder Proyek](#-struktur-folder-proyek)
-6. [Arsitektur Sistem](#-arsitektur-sistem)
-7. [Filosofi Kode](#-filosofi-kode-code-philosophy)
-8. [Referensi API Internal](#-referensi-api-internal-internal-api)
-9. [Deep Dive: Troubleshooting](#-deep-dive-panduan-lanjutan--troubleshooting)
-10. [Tips Hosting 24/7](#2-tips-hosting-247)
-11. [Panduan Pengembangan (Developer Guide)](#-panduan-pengembangan-developer-guide)
-12. [Roadmap & Changelog](#-roadmap-pengembangan-masa-depan)
-13. [F.A.Q](#3-masalah-umum-faq)
-14. [Penafian Hukum & Branding](#-penafian-hukum-legal-disclaimer)
+## 🌟 Overview
+Mahakarya bot musik Discord yang dibangun menggunakan **Python murni**, menggabungkan kecepatan ekstraksi metadata `yt-dlp` dengan kejernihan audio `FFmpeg`. Bot ini menghadirkan kontrol interaktif dan sistem antrean cerdas yang belum pernah ada sebelumnya di kelas bot Python.
 
 ---
 
-## 🛠️ Fitur-Fitur Unggulan
+## 📌 Navigasi Cepat (Hyper-Interactive TOC)
+<details open>
+<summary><b>Klik untuk Membuka Daftar Isi</b></summary>
 
-### 1. Sistem Antrean (Queue System) Canggih
-Mendukung penambahan lagu tanpa batas, pengacakan antrean (`/shuffle`), dan penghapusan lagu spesifik (`/remove`).
+1. [✨ Fitur Unggulan](#-fitur-unggulan)
+2. [🎮 Daftar Perintah Lengkap](#-daftar-perintah-slash-commands)
+3. [🚀 Panduan Setup & Instalasi](#-panduan-setup-cepat)
+4. [📂 Arsitektur & Struktur Folder](#-struktur--arsitektur)
+5. [💡 Pro-Tips for DJs](#-pro-tips-for-djs)
+6. [🛠️ Deep Dive: Teknis & Optimasi](#%EF%B8%8F-deep-dive-teknis--optimasi)
+   - [Optimasi FFmpeg & Stream](#optimasi-ffmpeg--stream)
+   - [Skalabilitas Multi-Server](#skalabilitas-multi-server)
+   - [Penanganan Rate Limit](#penanganan-rate-limit)
+7. [🌐 Hosting & Produksi](#-hosting--pemeliharaan)
+8. [📈 Roadmap & Riwayat Versi](#-roadmap--changelog)
+9. [⚖️ Hukum & Lisensi](#-penafian--lisensi)
+</details>
 
-### 2. Mode Loop Multi-Fungsi
-- **Single Loop**: Mengulang satu lagu yang sama terus menerus.
-- **Queue Loop**: Mengulang seluruh daftar putar secara berputar.
+---
 
-### 3. Kontrol Interaktif
-Kontrol musik langsung melalui tombol di bawah pesan tanpa perlu mengetik perintah berulang kali.
+## ✨ Fitur Unggulan
 
-### 4. Smart Voice Management
-- **Auto-Join**: Bergabung otomatis saat Anda memutar lagu.
-- **Self-Deafen**: Menghemat bandwidth dan performa dengan mode tuli otomatis.
-- **Auto-Disconnect**: Keluar otomatis jika tidak ada aktivitas untuk menghemat resource server.
+### 🎧 Audio Engine
+- **Direct Stream (No Buffer)**: Teknologi streaming langsung yang meminimalisir delay.
+- **Opus Optimized**: Kualitas suara setara CD (48kHz) dengan enkripsi penuh.
+- **Smart Reconnection**: Otomatis menyambung kembali jika terjadi gangguan sinyal internet.
+
+### 🤖 Automation
+- **Auto-Join & Auto-Deafen**: Bot langsung bekerja efisien sejak detik pertama masuk Voice Channel.
+- **Auto-Cleanup**: Pembersihan resource secara otomatis setelah pemutaran selesai untuk menjaga kesehatan memori RAM.
+- **Idle Timeout**: Bot akan otomatis keluar dari VC jika tidak ada lagu yang diputar selama 5 menit.
 
 ---
 
 ## 🎮 Daftar Perintah (Slash Commands)
 
-| Perintah | Deskripsi | Parameter |
-| :--- | :--- | :--- |
-| `/help` | Menampilkan menu bantuan premium ini. | - |
-| `/play` | Memutar lagu dari YouTube (URL atau Judul). | `query` |
-| `/nowplaying` | Menampilkan detail lagu yang sedang diputar. | - |
-| `/queue` | Melihat daftar 10 lagu mendatang di antrean. | - |
-| `/skip` | Melewati lagu saat ini ke lagu berikutnya. | - |
-| `/pause` | Menjeda pemutaran musik sementara. | - |
-| `/resume` | Melanjutkan musik yang dijeda. | - |
-| `/stop` | Menghentikan musik dan menghapus antrean. | - |
-| `/shuffle` | Mengacak seluruh daftar lagu di antrean. | - |
-| `/remove` | Menghapus lagu tertentu dari antrean. | `index` |
-| `/volume` | Mengatur volume suara bot (1-100%). | `volume` |
-| `/join` | Memanggil bot masuk ke Voice Channel Anda. | - |
-| `/leave` | Mengeluarkan bot dari Voice Channel. | - |
+| Kategori | Perintah | Parameter | Deskripsi |
+| :--- | :--- | :--- | :--- |
+| **Dasar** | `/play` | `query` | Putar lagu dari YouTube (URL/Judul) |
+| | `/help` | - | Menu bantuan interaktif ini |
+| **Playback** | `/pause` | - | Jeda pemutaran musik |
+| | `/resume` | - | Lanjutkan musik yang dijeda |
+| | `/skip` | - | Lompat ke lagu berikutnya di antrean |
+| | `/stop` | - | Hentikan total & hapus semua lagu |
+| **Antrean** | `/queue` | - | Lihat 10 daftar lagu mendatang |
+| | `/shuffle` | - | Acak urutan lagu di antrean |
+| | `/remove` | `index` | Hapus lagu di posisi tertentu |
+| **Sistem** | `/volume` | `1-100` | Sesuaikan kekerasan suara |
+| | `/nowplaying`| - | Info lengkap lagu saat ini |
+| | `/join` | - | Panggil bot ke Voice Channel |
+| | `/leave` | - | Paksa bot keluar dari VC |
 
 ---
 
-## 🚀 Panduan Instalasi & Persiapan
+## 🚀 Panduan Setup Cepat
 
 ### 1. Prasyarat Sistem
-- **Python 3.10+**: [Unduh di sini](https://www.python.org/).
-- **FFmpeg**: Wajib terinstal di sistem Anda.
+- **Python 3.10+** (Gunakan 3.11+ untuk performa tercepat).
+- **FFmpeg** terinstal dan terdaftar di `PATH` sistem.
 
-### 2. Kloning & Instalasi Library
+### 2. Instalasi Library
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Menjalankan Bot
-```bash
-python bot.py
+### 3. Konfigurasi .env
+```env
+DISCORD_TOKEN=Token_Anda
+GUILD_ID=ID_Server_Anda (Untuk Sinkronisasi Instan)
+DEBUG_MODE=False
 ```
 
 ---
 
-## ⚙️ Detail Konfigurasi (.env)
-
-| Variabel | Fungsi | Contoh Nilai |
-| :--- | :--- | :--- |
-| `DISCORD_TOKEN` | Token utama bot dari Discord Portal. | `MTUwMTI2...` |
-| `DEBUG_MODE` | Aktifkan log detail di terminal (`True`/`False`). | `False` |
-| `GUILD_ID` | ID Server untuk sinkronisasi instan (Dev Mode). | `1215693090...` |
-| `LOG_MAX_BYTES` | Ukuran maksimal file log sebelum di-rotate. | `5242880` (5MB) |
-| `LOG_BACKUP_COUNT` | Jumlah file backup log yang disimpan. | `5` |
+## 💡 Pro-Tips for DJs
+- **Pencarian Akurat**: Gunakan format `Artis - Judul Lagu` untuk mendapatkan hasil yang 100% tepat.
+- **Volume Emas**: Untuk kualitas suara terbaik di Discord, gunakan volume di kisaran **50-70%**.
+- **Interactive UI**: Gunakan tombol di bawah pesan "Now Playing" untuk kontrol yang lebih responsif daripada mengetik perintah.
 
 ---
 
-## 📦 Struktur Folder Proyek
+## 📂 Struktur & Arsitektur
+
+<details>
+<summary><b>📁 Klik untuk Detail Struktur Folder</b></summary>
 
 ```text
 MusicBot/
 ├── cogs/
-│   └── music.py        # Inti dari semua perintah Slash & logika Musik
+│   └── music.py        # Kumpulan Perintah Slash
 ├── modules/
-│   ├── player.py       # Mesin utama (MusicPlayer & YTDLSource)
-│   └── ui.py           # Desain tombol interaktif (Buttons & Views)
+│   ├── player.py       # Mesin Utama (Player Engine)
+│   └── ui.py           # Komponen UI Tombol
 ├── utils/
-│   └── logger.py       # Sistem log profesional (Console & File)
-├── logs/
-│   └── bot.log         # Rekam jejak aktivitas bot
-├── .env                # Konfigurasi rahasia
-├── bot.py              # Entry point utama aplikasi
-├── requirements.txt    # Daftar dependensi library
-└── README.md           # Dokumentasi
+│   ├── logger.py       # Log Profesional
+│   └── helpers.py      # Fungsi Pendukung
+├── logs/               # Folder Log File
+├── .env                # Kredensial Rahasia
+├── LICENSE             # Lisensi MIT
+└── bot.py              # Entry Point
+```
+</details>
+
+---
+
+## 🛠️ Deep Dive: Teknis & Optimasi
+
+### Optimasi FFmpeg & Stream
+Kami menggunakan parameter `-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5` yang memungkinkan FFmpeg untuk terus mencoba mengambil data stream jika terjadi gangguan koneksi sesaat tanpa memutus lagu.
+
+### Skalabilitas Multi-Server
+Bot ini menggunakan sistem **Guild-Based Player Mapping**. Artinya, setiap server (Guild) memiliki instance `MusicPlayer` yang terisolasi sepenuhnya. Hal ini menjamin:
+- Antrean tidak tertukar antar server.
+- Pengaturan volume tiap server berbeda.
+- Task asinkron berjalan secara paralel tanpa membebani satu sama lain.
+
+### Penanganan Rate Limit
+Dengan memisahkan ekstraksi metadata (`yt-dlp`) dari proses streaming, bot meminimalisir resiko terkena blokir IP oleh YouTube (429 Too Many Requests). Penggunaan `run_in_executor` memastikan proses ekstraksi tidak membuat bot hang.
+
+---
+
+## 🌐 Hosting & Pemeliharaan
+
+### Hosting VPS (Ubuntu/Linux)
+Rekomendasi penggunaan dengan **PM2**:
+```bash
+pm2 start bot.py --name "discord-music" --interpreter python3
 ```
 
----
-
-## 🏗️ Arsitektur Sistem
-
-```mermaid
-graph TD
-    A[User Slash Command] --> B{Bot.py}
-    B --> C[Music Cog]
-    C --> D[YT Search Extractor]
-    D --> E[YTDLSource Engine]
-    E --> F[FFmpeg Audio Stream]
-    F --> G[Voice Channel]
-    G --> H[User's Ears]
-```
-
----
-
-## 🧩 Filosofi Kode (Code Philosophy)
-
-Proyek ini dibangun dengan prinsip-prinsip pengembangan perangkat lunak modern:
-- **Modularitas**: Fungsi dipisahkan ke modul spesifik (`cogs`, `modules`, `utils`).
-- **Asynchronicity**: Menggunakan `asyncio` secara menyeluruh.
-- **Readability**: Kode bersih gaya PEP 8 dengan komentar mendalam.
-
----
-
-## 📖 Referensi API Internal (Internal API)
-
-### Class: `MusicPlayer`
-- `queue`: `asyncio.Queue` - Antrean lagu.
-- `current`: `Song` - Lagu aktif.
-- `player_loop()`: Loop utama pemroses antrean.
-
-### Class: `YTDLSource`
-- `from_url(url, stream=True)`: Method asinkron ekstraksi audio.
-- `cleanup()`: Pembersihan resource setelah pemutaran.
-
----
-
-## 🛠️ Deep Dive: Panduan Lanjutan & Troubleshooting
-
-### 1. Mengatasi Masalah Video Age-Restricted
-Gunakan file `cookies.txt`:
-1. Unduh dengan ekstensi browser "Get cookies.txt LOCALLY".
-2. Simpan di root folder bot.
-3. Tambahkan `'cookiefile': 'cookies.txt'` pada `ytdl_format_options` di `modules/player.py`.
-
-### 2. Tips Hosting 24/7
-- **VPS**: Gunakan Ubuntu 22.04 LTS.
-- **PM2**: `pm2 start bot.py --name "music-bot" --interpreter python3`.
-
----
-
-## 🛠️ Panduan Pengembangan (Developer Guide)
-
-### Menambahkan Command Baru
-```python
-@app_commands.command(name="nama", description="deskripsi")
-@app_commands.guild_only()
-async def nama(self, interaction: discord.Interaction):
-    await interaction.response.defer()
-    # Logika
-    await interaction.followup.send("Berhasil!")
-```
-
-### Optimasi FFmpeg
-- `before_options`: Menangani rekoneksi otomatis.
-- `options`: Filter `-vn` untuk hemat resource.
+### Penanganan Video Umur (Age-Restricted)
+Jika Anda menemui error video yang dibatasi usia, gunakan `cookies.txt` dan masukkan ke dalam parameter `ytdl_format_options` di `modules/player.py`.
 
 ---
 
 ## 📈 Roadmap & Changelog
-
-### 📈 Roadmap Pengembangan
-- [ ] Integrasi Lirik Lagu real-time.
-- [ ] Dukungan SoundCloud & Mixer.
-- [ ] Sistem Leveling Musik (XP).
-
-### 📈 Changelog
-- **v1.4.0**: Optimalisasi stabilitas & Error handling global.
-- **v1.3.0**: Penambahan `/shuffle`, `/remove`, dan `/help`.
-- **v1.2.0**: Slash Commands & UI Buttons.
+- **v1.5.0**: Grandmaster Documentation Release & Optimized Handlers.
+- **v1.4.0**: Shuffle, Remove, and Help commands implementation.
+- **v1.2.0**: Interactive Buttons & Slash Migration.
+- **v1.0.0**: Stable Core Release.
 
 ---
 
-## 3. Masalah Umum (F.A.Q)
-- **Q: Kenapa lagu tiba-tiba berhenti?** - Cek stabilitas internet server.
-- **Q: Kenapa bot tidak merespon?** - Pastikan sinkronisasi Slash Command selesai.
-- **Q: Suara bot lag?** - Cek beban CPU atau ganti region Voice Channel.
-
----
-
-## 🤝 Kontribusi & Donasi
-Kami menerima kontribusi melalui *Pull Request*. Berikan **Star ⭐** jika bermanfaat!
-
----
-
-## ⚖️ Penafian Hukum & Branding
-
-### ⚖️ Penafian Hukum (Legal Disclaimer)
-Bot ini untuk edukasi & penggunaan pribadi. Patuhi **ToS YouTube**. Kami tidak bertanggung jawab atas penyalahgunaan hak cipta.
-
-### 🌈 Skema Warna UI
-Menggunakan warna **Blurple (`#5865F2`)** agar senada dengan branding asli Discord.
+## ⚖️ Penafian & Lisensi
+Proyek ini dilisensikan di bawah **MIT License**. Gunakan dengan bijak dan patuhi **ToS YouTube**.
 
 ---
 
 > [!IMPORTANT]
-> Jaga kerahasiaan `DISCORD_TOKEN`. Jangan unggah file `.env` ke repositori publik.
+> Jaga keamanan file `.env` Anda. Jangan pernah mempublikasikan Token Bot di repositori publik.
 
-**© 2026 Antigravity - Dokumentasi v1.5.0-Final.**
+**© 2026 Antigravity - Dokumentasi Grandmaster Final.**
