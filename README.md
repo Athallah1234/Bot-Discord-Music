@@ -256,4 +256,67 @@ Kami menerima segala bentuk kontribusi melalui *Pull Request*. Jika Anda menyuka
 
 **Dibuat dengan ❤️ oleh Antigravity untuk Komunitas Discord.**
 
+---
+
+## 📚 Detail Dependensi & Rasionalisasi
+
+Mengapa kami memilih teknologi ini? Berikut adalah alasannya:
+
+- **`discord.py (v2.0+)`**: Library paling stabil untuk Python yang mendukung penuh *Application Commands* dan interaksi UI modern.
+- **`yt-dlp`**: Fork dari `youtube-dl` yang jauh lebih aktif dan memiliki kecepatan ekstraksi 3x lebih cepat serta dukungan situs yang lebih luas.
+- **`PyNaCl`**: Library kriptografi wajib untuk mendukung enkripsi suara (Voice Encryption) di Discord.
+- **`python-dotenv`**: Standar industri untuk mengelola variabel lingkungan agar kredensial tetap aman.
+
+---
+
+## 🛡️ Keamanan Lanjutan (Security Hardening)
+
+Untuk penggunaan tingkat produksi, kami menyarankan:
+1. **Rotasi Token**: Ganti `DISCORD_TOKEN` Anda setiap 3 bulan sekali.
+2. **Environment Isolation**: Gunakan fitur *Secrets* jika Anda men-deploy di platform seperti GitHub Actions atau Heroku.
+3. **Privileged Gateway Intents**: Bot ini hanya memerlukan `GUILD_VOICE_STATES` untuk berfungsi. Anda tidak perlu mengaktifkan semua intent jika ingin menjaga privasi server tetap maksimal.
+
+---
+
+## 🔧 Optimasi Sistem Operasi
+
+### Windows
+Pastikan FFmpeg ditambahkan ke **Environment Variables Path**. Anda bisa mengetik `ffmpeg -version` di CMD untuk memastikan.
+
+### Linux (Server)
+Kami menyarankan menggunakan `systemd` untuk memastikan bot otomatis menyala saat server restart:
+```ini
+# /etc/systemd/system/discord-bot.service
+[Unit]
+Description=Discord Music Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/MusicBot
+ExecStart=/usr/bin/python3 bot.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## 💡 Tips & Trik Penggunaan
+- **Gunakan Judul yang Spesifik**: Saat menggunakan `/play [judul]`, tambahkan nama artis (misal: `/play Bohemian Rhapsody Queen`) agar `yt-dlp` mendapatkan hasil terbaik pada percobaan pertama.
+- **Volume Rendah**: Menjaga volume di kisaran 40-60% memberikan kualitas audio paling jernih tanpa distorsi digital.
+
+---
+
+## 📬 Kontak & Dukungan
+Jika Anda menemukan bug atau ingin berdiskusi tentang fitur baru, silakan gunakan fitur **Issues** di repositori ini atau hubungi kami melalui Discord.
+
+---
+
+> [!TIP]
+> Star ⭐ proyek ini jika bermanfaat bagi Anda! Dukungan Anda sangat berarti bagi pengembangan fitur selanjutnya.
+
+
 
