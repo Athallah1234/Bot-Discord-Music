@@ -20,6 +20,24 @@ Bot ini bukan sekadar pemutar musik biasa. Kami mengintegrasikan teknologi ekstr
 
 ---
 
+## 📌 Daftar Isi
+1. [Fitur Utama](#-fitur-fitur-unggulan)
+2. [Daftar Perintah (Slash Commands)](#-daftar-perintah-slash-commands)
+3. [Struktur Proyek](#-struktur-folder-proyek)
+4. [Panduan Instalasi](#-panduan-instalasi--persiapan)
+5. [Konfigurasi .env](#-detail-konfigurasi-env)
+6. [Arsitektur Sistem](#%EF%B8%8F-arsitektur-sistem)
+7. [Panduan Troubleshooting](#%EF%B8%8F-deep-dive-panduan-lanjutan--troubleshooting)
+8. [Tips Hosting 24/7](#2-tips-hosting-247)
+9. [Panduan Pengembangan (Developer Guide)](#%EF%B8%8F-panduan-pengembangan-developer-guide)
+10. [Filosofi Kode](#-filosofi-kode-code-philosophy)
+11. [Referensi API Internal](#-referensi-api-internal-internal-api)
+12. [F.A.Q](#3-masalah-umum-faq)
+13. [Roadmap & Changelog](#-roadmap-pengembangan-masa-depan)
+14. [Lisensi & Hukum](#-penafian-hukum-legal-disclaimer)
+
+---
+
 ## 🛠️ Fitur-Fitur Unggulan
 
 ### 1. Sistem Antrean (Queue System) Canggih
@@ -317,6 +335,56 @@ Jika Anda menemukan bug atau ingin berdiskusi tentang fitur baru, silakan gunaka
 
 > [!TIP]
 > Star ⭐ proyek ini jika bermanfaat bagi Anda! Dukungan Anda sangat berarti bagi pengembangan fitur selanjutnya.
+
+---
+
+## 🧩 Filosofi Kode (Code Philosophy)
+
+Proyek ini dibangun dengan prinsip-prinsip pengembangan perangkat lunak modern:
+- **Modularitas**: Setiap fungsi dipisahkan ke dalam modul yang spesifik (`cogs`, `modules`, `utils`) untuk memudahkan pemeliharaan.
+- **Asynchronicity**: Menggunakan `asyncio` secara menyeluruh untuk memastikan bot tetap responsif meskipun sedang melakukan tugas berat.
+- **Readability**: Kode ditulis dengan gaya PEP 8 yang bersih dan disertai komentar pada bagian-bagian yang kompleks.
+
+---
+
+## 🔍 Tabel Troubleshooting Lanjutan
+
+| Masalah | Penyebab Umum | Solusi Cepat |
+| :--- | :--- | :--- |
+| `Voice Protocol Error` | Library `PyNaCl` tidak terinstal. | `pip install PyNaCl` |
+| `Opus Not Loaded` | File library `libopus` tidak ditemukan. | Instal `libopus-dev` (Linux) atau update `discord.py`. |
+| `403 Forbidden (YouTube)` | IP Server terkena rate limit YouTube. | Gunakan file `cookies.txt`. |
+| `Interaction Responded` | `defer()` dipanggil dua kali. | Pastikan hanya ada satu `response.defer()` per command. |
+
+---
+
+## 📖 Referensi API Internal (Internal API)
+
+### Class: `MusicPlayer`
+Mengelola status musik untuk setiap server (guild).
+- `queue`: `asyncio.Queue` - Antrean lagu.
+- `current`: `Song` - Lagu yang sedang diputar.
+- `player_loop()`: Loop utama yang memproses antrean secara terus-menerus.
+
+### Class: `YTDLSource`
+Menangani ekstraksi data dari `yt-dlp` dan konversi ke stream FFmpeg.
+- `from_url(url, stream=True)`: Method asinkron untuk mendapatkan objek audio.
+- `cleanup()`: Membersihkan resource setelah pemutaran selesai.
+
+---
+
+## ⚖️ Penafian Hukum (Legal Disclaimer)
+
+Bot ini dibuat hanya untuk tujuan edukasi dan penggunaan pribadi. Pengguna bertanggung jawab penuh atas konten yang diputar melalui bot ini. Pastikan Anda mematuhi **Syarat Layanan (Terms of Service)** dari platform sumber seperti YouTube. Kami tidak bertanggung jawab atas penyalahgunaan bot ini yang melanggar hak cipta.
+
+---
+
+## 🌈 Skema Warna UI
+Bot ini menggunakan skema warna **Blurple (`#5865F2`)** untuk Embed utama, memberikan tampilan yang senada dengan branding asli Discord untuk kesan yang lebih "native" dan premium.
+
+---
+
+**© 2026 Antigravity - Versi Dokumentasi 1.5.0-Final.**
 
 
 
